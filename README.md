@@ -3,6 +3,7 @@
 - Extracting data from websites (Library : rvest)
 - Import data to dataframe 
 - Combine all dataframe 
+- Rename column 
 - Output dataframe to excel.csv (Library : tidyverse)
 
 **Prepare Data** 
