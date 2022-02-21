@@ -3,7 +3,7 @@ library(XML)
 library(rvest)
 
 #Link For Web Scrapping
-Oil65 <- read_html('https://www.bangchak.co.th/th/oilprice/historical')
+Oil65 <- read_html('https://www.bangchak.co.th/th/oilprice/historical') #Current year
 Oil64 <- read_html('https://www.bangchak.co.th/th/oilprice/historical?year=2021')
 Oil63 <- read_html('https://www.bangchak.co.th/th/oilprice/historical?year=2020')
 Oil62 <- read_html('https://www.bangchak.co.th/th/oilprice/historical?year=2019')
