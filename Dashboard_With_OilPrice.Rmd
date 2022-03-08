@@ -1,0 +1,132 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+#import library
+library(flexdashboard) # R Markdown
+library(tidyverse) 
+library(highcharter) # Plot Graph
+library(gt)
+library(htmltools) 
+library(viridis) #colors
+```
+
+```{r}
+#importing data
+df <- read_csv('C:/Users/Noter/Desktop/Data/OilPrice/Raw Data/OilPrice58_65.csv')
+
+# Remove duplicate
+df <- df %>% distinct(.keep_all = TRUE)
+
+# '-' to NA
+df[df == '-'] <- NA
+
+# check if any missing values
+mean(complete.cases(df)) 
+
+# remove rows with NA
+#df <- na.omit(df) 
+
+## Change type data ------------------------------------------------------------
+# Replace '/' to '-'
+df$Date <- gsub('/','-',df$Date)
+# Check type data
+str(df)
+# Change to Date
+df$Date <- as.Date(df$Date,format = '%d-%m-%Y')
+# Check type data again
+str(df)
+
+# Sort data
+df <- df[order(df$Date), ]
+
+## Fix data problem ------------------------------------------------------------
+# Select data (Don't use data error) 
+df <- df %>% filter(Date >= '2560-05-09')
+
+# Replace Data to correct
+df %>% filter(Date == '2562-06-07')
+df$'95' <- replace(df$'95', df$Date == '2562-06-07', 27.35)
+```
+
+# Books
+
+## Column {.tabset .tabset-fade data-width="650"}
+
+### OilPrice of 95
+
+```{r}
+# Colors
+N = nrow(df)
+custom_colors <- viridis::mako(n = N)
+color_black <- '#000000'
+
+# Most popular Authors by reviews
+df %>% 
+  # Group by
+  #group_by(Date) %>% 
+  # Summarise (Column Name = ___(column))
+  #summarise(Reviews = max()) %>%
+  # Sort (DESC(column))
+  arrange(Date) %>%
+  # Show N Rows
+  head(N) %>%
+  # type plot
+  hchart(type = 'line',
+         hcaes(x = Date, y = df$'95' ,color = custom_colors)) %>%
+  # same hchart but another type plot
+  #hc_add_series(df %>% 
+                #arrange(desc(Date)) %>% 
+                #head(370),
+                #type = 'line', hcaes(x = Date, y = df$'95' ,color = color_black ))  %>% 
+  
+ hc_xAxis (
+    plotBands = list(
+      list(
+        label = list(text = "Event1"),
+        color = hex_to_rgba("red", 0.1),
+        width = 5,
+        from = datetime_to_timestamp(as.Date("2561-10-03", tz = "UTC")),
+        to = datetime_to_timestamp(as.Date("2561-12-28", tz = "UTC"))
+        ),
+      list(
+        label = list(text = "Event2"),
+        color = hex_to_rgba("green", 0.1),
+        width = 5,
+        from = datetime_to_timestamp(as.Date("2563-02-22", tz = "UTC")),
+        to = datetime_to_timestamp(as.Date("2563-04-30", tz = "UTC"))
+        )
+    ))   %>%
+  
+  # Choose theme
+  hc_add_theme(hc_theme_google()) %>% 
+  # Mouse ponit to column show some text
+  hc_tooltip(pointFormat = '<b>Price: </b> {point.y} <br>') %>% 
+  # Title Name
+  hc_title(text = 'Oil Price',
+           style = list(fontSize = '25px', fontWeight = 'bold')) %>%
+  # Sub-title Name
+  hc_subtitle(text = '9/May/60 - 8/March/65',
+              style = list(fontSize = '16px')) %>%
+  # text credit
+  hc_credits(enabled = TRUE, text = '@PersThanachot')
+```
+
+## Column {data-width="350"}
+
+### Chart B
+
+```{r}
+
+```
+
+### Chart C
+
+```{r}
+
+```
