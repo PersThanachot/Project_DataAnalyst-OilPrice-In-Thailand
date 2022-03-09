@@ -1,5 +1,5 @@
 ---
-title: "Untitled"
+title: "OilPrice in Thailand"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
@@ -16,7 +16,7 @@ library(htmltools)
 library(viridis) #colors
 ```
 
-```{r}
+```{r,, results='hide'}
 #importing data
 df <- read_csv('C:/Users/Noter/Desktop/Data/OilPrice/Raw Data/OilPrice58_65.csv')
 
@@ -54,11 +54,7 @@ df %>% filter(Date == '2562-06-07')
 df$'95' <- replace(df$'95', df$Date == '2562-06-07', 27.35)
 ```
 
-# Books
-
-## Column {.tabset .tabset-fade data-width="650"}
-
-### OilPrice of 95
+### OilPrice {data-height=0}
 
 ```{r}
 # Colors
@@ -111,22 +107,16 @@ df %>%
   hc_title(text = 'Oil Price',
            style = list(fontSize = '25px', fontWeight = 'bold')) %>%
   # Sub-title Name
-  hc_subtitle(text = '9/May/60 - 8/March/65',
+  hc_subtitle(text = '9/May/60 - 9/March/65',
               style = list(fontSize = '16px')) %>%
   # text credit
   hc_credits(enabled = TRUE, text = '@PersThanachot')
 ```
 
-## Column {data-width="350"}
-
-### Chart B
+### <font size='3'>**https://www.bangchak.co.th/th/oilprice/historical**  </font> {data-height=0}
 
 ```{r}
-
-```
-
-### Chart C
-
-```{r}
-
+valueBox(value = tags$p('Data Source', 
+                        style = 'color: White;'), 
+         color='black')
 ```
