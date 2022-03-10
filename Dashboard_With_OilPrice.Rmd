@@ -20,6 +20,8 @@ library(viridis) #colors
 #importing data
 df <- read_csv('C:/Users/Noter/Desktop/Data/OilPrice/Raw Data/OilPrice58_65.csv')
 
+df <- df %>% rename(Gasohol_95 = '95')
+
 # Remove duplicate
 df <- df %>% distinct(.keep_all = TRUE)
 
@@ -51,7 +53,7 @@ df <- df %>% filter(Date >= '2560-05-09')
 
 # Replace Data to correct
 df %>% filter(Date == '2562-06-07')
-df$'95' <- replace(df$'95', df$Date == '2562-06-07', 27.35)
+df$Gasohol_95 <- replace(df$Gasohol_95, df$Date == '2562-06-07', 27.35)
 ```
 
 ### OilPrice {data-height=0}
@@ -74,7 +76,7 @@ df %>%
   head(N) %>%
   # type plot
   hchart(type = 'line',
-         hcaes(x = Date, y = df$'95' ,color = custom_colors)) %>%
+         hcaes(x = Date, y = Gasohol_95, color = custom_colors)) %>%
   # same hchart but another type plot
   #hc_add_series(df %>% 
                 #arrange(desc(Date)) %>% 
@@ -82,22 +84,126 @@ df %>%
                 #type = 'line', hcaes(x = Date, y = df$'95' ,color = color_black ))  %>% 
   
  hc_xAxis (
-    plotBands = list(
-      list(
-        label = list(text = "Event1"),
-        color = hex_to_rgba("red", 0.1),
-        width = 5,
-        from = datetime_to_timestamp(as.Date("2561-10-03", tz = "UTC")),
-        to = datetime_to_timestamp(as.Date("2561-12-28", tz = "UTC"))
-        ),
-      list(
-        label = list(text = "Event2"),
-        color = hex_to_rgba("green", 0.1),
-        width = 5,
-        from = datetime_to_timestamp(as.Date("2563-02-22", tz = "UTC")),
-        to = datetime_to_timestamp(as.Date("2563-04-30", tz = "UTC"))
-        )
-    ))   %>%
+           title = list(text = "Date",
+                   style = list(fontWeight = "bold",
+                                color = "black",
+                                fontSize = "18px")
+                        ),
+                        
+            plotBands = list(
+                              list(
+                                label = list(text = "Event1"),
+                                color = hex_to_rgba("red", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2561-10-03", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2561-12-28", tz = "UTC"))
+                                ),
+              
+                              list(
+                                color = hex_to_rgba("green", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2563-01-13", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2563-04-30", tz = "UTC"))
+                                ),
+                              
+                               list(
+                                color = hex_to_rgba("red", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2563-05-01", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2563-06-01", tz = "UTC"))
+                                ),
+                              
+                              list(
+                                color = hex_to_rgba("green", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2563-12-15", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2564-01-15", tz = "UTC"))
+                                ),
+                              
+                              list(
+                                color = hex_to_rgba("red", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2564-04-01", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2564-05-01", tz = "UTC"))
+                                ),
+                              
+                              list(
+                                color = hex_to_rgba("green", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2564-06-22", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2564-07-22", tz = "UTC"))
+                                ),
+                            
+                              
+                              list(
+                                label = list(text = "Russia - Ukraine"),
+                                color = hex_to_rgba("red", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2564-11-10", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2565-03-10", tz = "UTC"))
+                                )
+                            ),
+           
+            plotLines = list(
+                              list(
+                                label = list(text = "COVID-19"),
+                                color = "#3bb143",
+                                width = 1.5,
+                                value = datetime_to_timestamp(as.Date('2563-01-13', tz = 'UTC'))
+                                  ),
+              
+                              list(
+                                label = list(text = "loosen restrictions"),
+                                color = "#FF0000",
+                                width = 1.5,
+                                value = datetime_to_timestamp(as.Date('2563-05-01', tz = 'UTC'))
+                                  ),
+                              
+                              list(
+                                label = list(text = "Second"),
+                                color = "#3bb143",
+                                width = 1.5,
+                                value = datetime_to_timestamp(as.Date('2563-12-15', tz = 'UTC'))
+                                  ),
+                              
+                              list(
+                                label = list(text = "Alpha"),
+                                color = "#FF0000",
+                                width = 1.5,
+                                value = datetime_to_timestamp(as.Date('2564-04-01', tz = 'UTC'))
+                                  ),
+                              
+                               list(
+                                label = list(text = "Delta"),
+                                color = "#3bb143",
+                                width = 1.5,
+                                value = datetime_to_timestamp(as.Date('2564-06-22', tz = 'UTC'))
+                                  ),
+                              
+                              list(
+                                label = list(text = "russia declares war on ukraine", y = 150 ),
+                                color = "#FF0000",
+                                width = 1.5,
+                                value = datetime_to_timestamp(as.Date('2565-02-24', tz = 'UTC'))
+                                  ),
+                              
+                              list(
+                                label = list(text = "Omicron", y = 100),
+                                color = "#FF0000",
+                                width = 1.5,
+                                value = datetime_to_timestamp(as.Date('2564-12-20', tz = 'UTC'))
+                                  )
+                              
+                             ) 
+           )%>%
+  
+    hc_yAxis(
+             title = list(text = "Gasohol 95",
+                     style = list(fontWeight = "bold",
+                                  color = "black",
+                                  fontSize = "18px")
+                                  )
+             ) %>% 
   
   # Choose theme
   hc_add_theme(hc_theme_google()) %>% 
@@ -107,7 +213,7 @@ df %>%
   hc_title(text = 'Oil Price',
            style = list(fontSize = '25px', fontWeight = 'bold')) %>%
   # Sub-title Name
-  hc_subtitle(text = '9/May/60 - 9/March/65',
+  hc_subtitle(text = '9/May/60 - 10/March/65',
               style = list(fontSize = '16px')) %>%
   # text credit
   hc_credits(enabled = TRUE, text = '@PersThanachot')
