@@ -55,7 +55,10 @@ df <- df %>% filter(Date >= '2560-05-09')
 df %>% filter(Date == '2562-06-07')
 df$Gasohol_95 <- replace(df$Gasohol_95, df$Date == '2562-06-07', 27.35)
 ```
-
+Page {data-orientation=rows}
+================================================================================
+Row {.tabset .tabset-fade}
+--------------------------------------------------------------------------------
 ### OilPrice {data-height=0}
 
 ```{r}
@@ -92,7 +95,7 @@ df %>%
                         
             plotBands = list(
                               list(
-                                label = list(text = "Event1"),
+                                label = list(text = "<b>Demand = Down <br> Supply = Up </br><b>"),
                                 color = hex_to_rgba("red", 0.1),
                                 width = 5,
                                 from = datetime_to_timestamp(as.Date("2561-10-03", tz = "UTC")),
@@ -136,7 +139,7 @@ df %>%
                             
                               
                               list(
-                                label = list(text = "Russia - Ukraine"),
+                                label = list(text = "<b>Russia - Ukraine<b>"),
                                 color = hex_to_rgba("red", 0.1),
                                 width = 5,
                                 from = datetime_to_timestamp(as.Date("2564-11-10", tz = "UTC")),
@@ -213,12 +216,73 @@ df %>%
   hc_title(text = 'Oil Price',
            style = list(fontSize = '25px', fontWeight = 'bold')) %>%
   # Sub-title Name
-  hc_subtitle(text = '9/May/60 - 10/March/65',
+  hc_subtitle(text = '9/May/60 - 15/March/65',
               style = list(fontSize = '16px')) %>%
   # text credit
   hc_credits(enabled = TRUE, text = '@PersThanachot')
 ```
 
+### OPEC Price {data-height=0}
+
+```{r}
+df1 <- read_csv('C:/Users/Noter/Desktop/Data/OilPrice/Raw Data/OPEC.csv')
+
+df1 <- df1 %>% filter(Date >= '2017-05-01')
+
+N = nrow(df1)
+custom_colors <- viridis::mako(n = N)
+color_black <- '#000000'
+
+df1 %>% 
+  # Group by
+  #group_by(Date) %>% 
+  # Summarise (Column Name = ___(column))
+  #summarise(Reviews = max()) %>%
+  # Sort (DESC(column))
+  arrange(Date) %>%
+  # Show N Rows
+  head(N) %>%
+  # type plot
+  hchart(type = 'line',
+         hcaes(x = Date, y = Value, color = custom_colors)) %>%
+  # same hchart but another type plot
+  #hc_add_series(df %>% 
+                #arrange(desc(Date)) %>% 
+                #head(370),
+                #type = 'line', hcaes(x = Date, y = df$'95' ,color = color_black ))  %>% 
+  
+ hc_xAxis (
+           title = list(text = "Date",
+                   style = list(fontWeight = "bold",
+                                color = "black",
+                                fontSize = "18px")
+                        )
+           )%>%
+  
+    hc_yAxis(
+             title = list(text = "Value",
+                     style = list(fontWeight = "bold",
+                                  color = "black",
+                                  fontSize = "18px")
+                                  )
+             ) %>% 
+  
+  # Choose theme
+  hc_add_theme(hc_theme_google()) %>% 
+  # Mouse ponit to column show some text
+  hc_tooltip(pointFormat = '<b>Price: </b> {point.y} <br>') %>% 
+  # Title Name
+  hc_title(text = 'OPEC Price',
+           style = list(fontSize = '25px', fontWeight = 'bold')) %>%
+  # Sub-title Name
+  hc_subtitle(text = '1/May/60 - 14/March/65',
+              style = list(fontSize = '16px')) %>%
+  # text credit
+  hc_credits(enabled = TRUE, text = '@PersThanachot')
+
+```
+Row 
+--------------------------------------------------------------------------------
 ### <font size='3'>**https://www.bangchak.co.th/th/oilprice/historical**  </font> {data-height=0}
 
 ```{r}
