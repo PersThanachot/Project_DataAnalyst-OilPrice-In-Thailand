@@ -18,7 +18,7 @@ library(viridis) #colors
 
 ```{r,, results='hide'}
 #importing data
-df <- read_csv('C:/Users/Noter/Desktop/Data/OilPrice/Raw Data/OilPrice58_65.csv')
+df <- read_csv('C:/.../OilPrice58_65.csv')
 
 df <- df %>% rename(Gasohol_95 = '95')
 
@@ -59,7 +59,7 @@ Page {data-orientation=rows}
 ================================================================================
 Row {.tabset .tabset-fade}
 --------------------------------------------------------------------------------
-### OilPrice {data-height=0}
+### Thai OilPrice {data-height=0}
 
 ```{r}
 # Colors
@@ -111,6 +111,7 @@ df %>%
                                 ),
               
                               list(
+                                label = list(text = "<b>COVID-19<b>"),
                                 color = hex_to_rgba("red", 0.1),
                                 width = 5,
                                 from = datetime_to_timestamp(as.Date("2563-01-13", tz = "UTC")),
@@ -118,6 +119,7 @@ df %>%
                                 ),
                               
                                list(
+                                label = list(text = "<b>Vaccine<b>"),
                                 color = hex_to_rgba("green", 0.1),
                                 width = 5,
                                 from = datetime_to_timestamp(as.Date("2563-05-01", tz = "UTC")),
@@ -156,19 +158,19 @@ df %>%
                             ),
            
             plotLines = list(
-                              list(
-                                label = list(text = "COVID-19"),
-                                color = "#FF0000",
-                                width = 1.5,
-                                value = datetime_to_timestamp(as.Date('2563-01-13', tz = 'UTC'))
-                                  ),
+                              #list(
+                                #label = list(text = "COVID-19"),
+                                #color = "#FF0000",
+                                #width = 1.5,
+                                #value = datetime_to_timestamp(as.Date('2563-01-13', tz = 'UTC'))
+                                  #),
               
-                              list(
-                                label = list(text = "Vaccine"),
-                                color = "#3bb143",
-                                width = 1.5,
-                                value = datetime_to_timestamp(as.Date('2563-05-01', tz = 'UTC'))
-                                  ),
+                              #list(
+                                #label = list(text = "Vaccine"),
+                                #color = "#3bb143",
+                                #width = 1.5,
+                                #value = datetime_to_timestamp(as.Date('2563-05-01', tz = 'UTC'))
+                                  #),
                               
                               #list(
                                 #label = list(text = "Second"),
@@ -196,14 +198,15 @@ df %>%
                                 color = "#FF0000",
                                 width = 1.5,
                                 value = datetime_to_timestamp(as.Date('2565-02-24', tz = 'UTC'))
-                                  ),
-                              
-                              list(
-                                label = list(text = "Omicron", y = 100),
-                                color = "#FF0000",
-                                width = 1.5,
-                                value = datetime_to_timestamp(as.Date('2564-12-20', tz = 'UTC'))
                                   )
+                              #,
+                              
+                              #list(
+                                #label = list(text = "Omicron", y = 100),
+                                #color = "#FF0000",
+                                #width = 1.5,
+                                #value = datetime_to_timestamp(as.Date('2564-12-20', tz = 'UTC'))
+                                  #)
                               
                              ) 
            )%>%
@@ -233,7 +236,7 @@ df %>%
 ### OPEC Price {data-height=0}
 
 ```{r}
-df1 <- read_csv('C:/Users/Noter/Desktop/Data/OilPrice/Raw Data/OPEC.csv')
+df1 <- read_csv('C:/.../OPEC.csv')
 
 df1 <- df1 %>% filter(Date >= '2017-05-01')
 
@@ -264,16 +267,135 @@ df1 %>%
                    style = list(fontWeight = "bold",
                                 color = "black",
                                 fontSize = "18px")
-                        )
+                        ),
+           
+            plotBands = list(
+                              list(
+                                label = list(text = "<b>Demand = Down <br> Supply = Up </br><b>",y = 100),
+                                color = hex_to_rgba("red", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2018-10-03", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2018-12-28", tz = "UTC"))
+                                ),
+                              
+                              list(
+                                label = list(text = "<b>Supply = Down<b>"),
+                                color = hex_to_rgba("green", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2018-12-29", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2019-04-27", tz = "UTC"))
+                                ),
+              
+                              list(
+                                label = list(text = "<b>COVID-19<b>"),
+                                color = hex_to_rgba("red", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2020-01-13", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2020-04-30", tz = "UTC"))
+                                ),
+                              
+                               list(
+                                label = list(text = "<b>Vaccine<b>"),
+                                color = hex_to_rgba("green", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2020-05-01", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2021-11-09", tz = "UTC"))
+                                ),
+                              
+                              #list(
+                                #color = hex_to_rgba("green", 0.1),
+                                #width = 5,
+                                #from = datetime_to_timestamp(as.Date("2563-12-15", tz = "UTC")),
+                                #to = datetime_to_timestamp(as.Date("2564-01-15", tz = "UTC"))
+                                #),
+                              
+                              #list(
+                                #color = hex_to_rgba("red", 0.1),
+                                #width = 5,
+                                #from = datetime_to_timestamp(as.Date("2564-04-01", tz = "UTC")),
+                                #to = datetime_to_timestamp(as.Date("2564-05-01", tz = "UTC"))
+                                #),
+                              
+                              #list(
+                                #color = hex_to_rgba("green", 0.1),
+                                #width = 5,
+                                #from = datetime_to_timestamp(as.Date("2564-06-22", tz = "UTC")),
+                                #to = datetime_to_timestamp(as.Date("2564-07-22", tz = "UTC"))
+                                #),
+                            
+                              
+                              list(
+                                label = list(text = "<b>Russia - Ukraine<b>"),
+                                color = hex_to_rgba("red", 0.1),
+                                width = 5,
+                                from = datetime_to_timestamp(as.Date("2021-11-10", tz = "UTC")),
+                                to = datetime_to_timestamp(as.Date("2022-03-10", tz = "UTC"))
+                                )
+                            ),
+           
+            plotLines = list(
+                              #list(
+                                #label = list(text = "COVID-19"),
+                                #color = "#FF0000",
+                                #width = 1.5,
+                                #value = datetime_to_timestamp(as.Date('2563-01-13', tz = 'UTC'))
+                                  #),
+              
+                              #list(
+                                #label = list(text = "Vaccine"),
+                                #color = "#3bb143",
+                                #width = 1.5,
+                                #value = datetime_to_timestamp(as.Date('2563-05-01', tz = 'UTC'))
+                                  #),
+                              
+                              #list(
+                                #label = list(text = "Second"),
+                                #color = "#3bb143",
+                                #width = 1.5,
+                                #value = datetime_to_timestamp(as.Date('2563-12-15', tz = 'UTC'))
+                                  #),
+                              
+                              #list(
+                                #label = list(text = "Alpha"),
+                                #color = "#FF0000",
+                                #width = 1.5,
+                                #value = datetime_to_timestamp(as.Date('2564-04-01', tz = 'UTC'))
+                                  #),
+                              
+                               #list(
+                                #label = list(text = "Delta"),
+                                #color = "#3bb143",
+                                #width = 1.5,
+                                #value = datetime_to_timestamp(as.Date('2564-06-22', tz = 'UTC'))
+                                  #),
+                              
+                              list(
+                                label = list(text = "russia declares war on ukraine", y = 150 ),
+                                color = "#FF0000",
+                                width = 1.5,
+                                value = datetime_to_timestamp(as.Date('2022-02-24', tz = 'UTC'))
+                                  )
+                              #,
+                              
+                              #list(
+                                #label = list(text = "Omicron", y = 100),
+                                #color = "#FF0000",
+                                #width = 1.5,
+                                #value = datetime_to_timestamp(as.Date('2564-12-20', tz = 'UTC'))
+                                  #)
+                          )
            )%>%
   
-    hc_yAxis(
-             title = list(text = "Value",
-                     style = list(fontWeight = "bold",
-                                  color = "black",
-                                  fontSize = "18px")
-                                  )
-             ) %>% 
+  hc_yAxis (
+            title = list(text = "Value",
+                    style = list(fontWeight = "bold",
+                                color = "black",
+                                fontSize = "18px")
+                         )
+            )%>% 
+                        
+           
+
   
   # Choose theme
   hc_add_theme(hc_theme_google()) %>% 
@@ -283,12 +405,13 @@ df1 %>%
   hc_title(text = 'OPEC Price',
            style = list(fontSize = '25px', fontWeight = 'bold')) %>%
   # Sub-title Name
-  hc_subtitle(text = '1/May/60 - 16/March/65',
+  hc_subtitle(text = '1/May/60 - 17/March/65',
               style = list(fontSize = '16px')) %>%
   # text credit
   hc_credits(enabled = TRUE, text = '@PersThanachot')
 
 ```
+
 Row 
 --------------------------------------------------------------------------------
 ### <font size='3'>**https://www.bangchak.co.th/th/oilprice/historical**  </font> {data-height=0}
