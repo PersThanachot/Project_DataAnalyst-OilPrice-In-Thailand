@@ -69,11 +69,3 @@ names(OilPrice)[10] <- 'NGV'
 
 #Output Dataframe to excel.csv
 write.csv(OilPrice,"location file/excel.csv", row.names = FALSE)
-names(OilPrice)[3] <- 'Diesel_B7'
-names(OilPrice)[4] <- 'Diesel'
-names(OilPrice)[5] <- 'Diesel_B20'
-names(OilPrice)[6] <- 'E85'
-names(OilPrice)[7] <- 'E20'
-names(OilPrice)[8] <- '91'
-names(OilPrice)[9] <- '95'
-names(OilPrice)[10] <- 'NGV'
