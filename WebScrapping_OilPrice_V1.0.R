@@ -3,14 +3,14 @@ library(XML)
 library(rvest)
 
 #Link For Web Scrapping
-Oil65 <- read_html('https://www.bangchak.co.th/th/oilprice/historical') #Current year
-Oil64 <- read_html('https://www.bangchak.co.th/th/oilprice/historical?year=2021')
-Oil63 <- read_html('https://www.bangchak.co.th/th/oilprice/historical?year=2020')
-Oil62 <- read_html('https://www.bangchak.co.th/th/oilprice/historical?year=2019')
-Oil61 <- read_html('https://www.bangchak.co.th/th/oilprice/historical?year=2018')
-Oil60 <- read_html('https://www.bangchak.co.th/th/oilprice/historical?year=2017')
-Oil59 <- read_html('https://www.bangchak.co.th/th/oilprice/historical?year=2016')
-Oil58 <- read_html('https://www.bangchak.co.th/th/oilprice/historical?year=2015')
+Oil65 <- read_html('url') #Current year
+Oil64 <- read_html('url2021')
+Oil63 <- read_html('url2020')
+Oil62 <- read_html('url2019')
+Oil61 <- read_html('url2018')
+Oil60 <- read_html('url2017')
+Oil59 <- read_html('url2016')
+Oil58 <- read_html('url2015')
 
 #Import to Dataframe 
 tables65 <- Oil65 %>% html_table() #rvest find all tables
