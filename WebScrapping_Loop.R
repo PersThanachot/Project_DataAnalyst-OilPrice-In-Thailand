@@ -8,7 +8,7 @@ reviews <- character()
 #For Loop
 for(reviews_pages in 2015:2022){
   
-  link = paste0('https://www.bangchak.co.th/th/oilprice/historical?year=', reviews_pages)
+  link = paste0('url', reviews_pages)
   # read link
   pages = read_html(link)
   # find table in website
